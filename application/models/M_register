@@ -1,0 +1,41 @@
+<?php
+class M_register extends CI_Model 
+{
+	function cek_username($username)
+	{
+		return $this->db
+			->select('id_user')
+			->where('username', $username)
+			->where('dihapus', 'tidak')
+			->limit(1)
+			->get('tb_user');
+	}
+
+	function signup($username, $tgllahir, $nama, $id_akses, $status)
+	{
+		$dt = array(
+			'username' => $username,
+			'password' => sha1($tgllahir),
+			'nama' => $nama,
+			'id_akses' => '2',
+			'status' => 'Non Aktif',
+			'dihapus' => 'tidak'
+		);
+
+		return $this->db->insert('tb_user', $dt);
+	}
+
+	function tambah_baru($username, $tgllahir, $nama, $id_akses, $status)
+	{
+		$dt = array(
+			'username' => $username,
+			'password' => sha1($tgllahir),
+			'nama' => $nama,
+			'id_akses' => '2',
+			'status' => 'Non Aktif',
+			'dihapus' => 'tidak'
+		);
+
+		return $this->db->insert('tb_user', $dt);
+	}
+}
